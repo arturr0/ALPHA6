@@ -1,0 +1,20 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT main:app
+
+env_variables:
+  PROJECT_ID: "My First Project"
+
+env: flex
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  target_throughput_utilization: 0.65
+  max_instances: 10
+  min_instances: 1
+  cool_down_period_sec: 60
+
+handlers:
+- url: /.*
+  script: auto
+
+service: my-app-service  # Replace with your desired service name
